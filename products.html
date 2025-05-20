@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Produkter</title>
-  <link rel="stylesheet" href="css/style.css"/>
-</head>
-<body>
-  <header>
-    <h1>Produkter</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Hem</a></li>
-        <li><a href="products.html">Produkter</a></li>
-        <li><a href="contact.html">Kontakta oss</a></li>
-      </ul>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produkter</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Produkter</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Hem</a></li>
+          <li><a href="products.html">Produkter</a></li>
+          <li><a href="contact.html">Kontakta oss</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
-    <!-- KATEGORIKNAPPAR -->
-    <section id="categories">
-      <h2>Filtrera produkter</h2>
-      <!-- "Visa alla" manuellt tillagd -->
-      <div class="category" data-filter="">Visa alla</div>
-    </section>
+    <main>
+      <!-- KATEGORIKNAPPAR -->
+      <section id="categories">
+        <h2>Filtrera produkter</h2>
+        <!-- "Visa alla" manuellt tillagd -->
+        <div class="category" data-filter="">Visa alla</div>
+      </section>
 
-    <section id="productList"></section>
+      <section id="productList"></section>
 
-    <div id="thankYouMessage" style="display:none;">
-      <p>Tack för ditt meddelande!</p>
-    </div>
-  </main>
+      <div id="thankYouMessage" style="display: none">
+        <p>Tack för ditt meddelande!</p>
+      </div>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Webshop AB</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025 Webshop AB</p>
+    </footer>
 
-  <!-- Importera JS-modul -->
-  <script type="module">
-    import { fetchCategories, fetchProducts } from './js/displayProducts.js';
+    <!-- Importera JS-modul -->
+    <script type="module">
+      import { fetchCategories, fetchProducts } from "./js/displayProducts.js";
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Ladda kategorier dynamiskt från Firebase
-      fetchCategories();
+      document.addEventListener("DOMContentLoaded", () => {
+        // Ladda kategorier dynamiskt från Firebase
+        fetchCategories();
 
-      // Lägg till funktion för "Visa alla"-knappen
-      const showAllBtn = document.querySelector('.category[data-filter=""]');
-      if (showAllBtn) {
-        showAllBtn.addEventListener('click', () => {
-          fetchProducts('');
-        });
-      }
+        // Lägg till funktion för "Visa alla"-knappen
+        const showAllBtn = document.querySelector('.category[data-filter=""]');
+        if (showAllBtn) {
+          showAllBtn.addEventListener("click", () => {
+            fetchProducts("");
+          });
+        }
 
-      // Hämta alla produkter direkt vid sidladdning
-      fetchProducts('');
-    });
-  </script>
-</body>
+        // Hämta alla produkter direkt vid sidladdning
+        fetchProducts("");
+      });
+    </script>
+  </body>
 </html>

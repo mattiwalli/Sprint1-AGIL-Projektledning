@@ -1,66 +1,83 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adminpanel – Lägg till Kategori</title>
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1 class="title">Adminpanel</h1>
-      <p class="subtitle">Lägg till ny produktkategori</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adminpanel – Produkter & Kategorier</title>
+    <script type="module" src="/js/firebase.js" defer></script>
+    <script type="module" src="/js/admin.js" defer></script>
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Adminpanel</h1>
       <nav>
         <ul>
           <li><a href="index.html">Hem</a></li>
           <li><a href="products.html">Produkter</a></li>
-          <li><a href="admin.html">Admin</a></li>
+          <li><a href="admin.html" class="active">Admin</a></li>
         </ul>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <section class="content">
-      <h2>Lägg till kategori</h2>
-      <form id="categoryForm">
-        <label for="categoryName">Kategorinamn:</label>
-        <input type="text" id="categoryName" name="categoryName" required />
+    <main>
+   
+      <section>
+        <h2>1. Skapa ny kategori</h2>
+        <form id="categoryForm">
+          <input
+            type="text"
+            id="categoryName"
+            placeholder="Kategorinamn"
+            required
+          />
+          <button type="submit">Lägg till kategori</button>
+        </form>
+        <div id="categoryMessage" class="message" hidden>Kategori tillagd!</div>
+      </section>
 
-        <button type="submit">Lägg till</button>
-      </form>
+    
+      <section>
+        <h2>Dina kategorier</h2>
+        <ul id="categoryList"></ul>
+      </section>
 
-      <div id="categoryMessage" style="display:none;">
-        Kategorin har lagts till!
-      </div>
-    </section>
-  </main>
+      
+      <section>
+        <h2>2. Lägg till ny produkt</h2>
+        <form id="productForm">
+          <input
+            type="text"
+            id="productName"
+            placeholder="Produktnamn"
+            required
+          />
+          <textarea
+            id="productDesc"
+            placeholder="Produktbeskrivning"
+            required
+          ></textarea>
+          <select id="productCategory" required>
+            <option value="" disabled selected>Välj kategori</option>
+          </select>
+          <div>
+            <label>Bilder (max 3):</label>
+            <input type="file" id="image1" accept="image/*" required />
+            <input type="file" id="image2" accept="image/*" />
+            <input type="file" id="image3" accept="image/*" />
+          </div>
+          <button type="submit">Lägg till produkt</button>
+        </form>
+        <div id="productMessage" class="message" hidden>Produkt tillagd!</div>
+      </section>
 
-  <footer>
-    <p>&copy; 2025 Webshop AB</p>
-  </footer>
+      
+      <section>
+        <h2>3. Dina produkter</h2>
+        <ul id="productList"></ul>
+      </section>
+    </main>
 
-  <script>
-    const form = document.getElementById('categoryForm');
-    const message = document.getElementById('categoryMessage');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const category = document.getElementById('categoryName').value.trim();
-      if (category) {
-        // denna delen ska fixas senare så att man även kan lägga till kategorierna till firebase (när någon har fixat firebase)
-        console.log('Kategori tillagd:', category);
-
-        form.reset();
-        message.style.display = 'block';
-
-        setTimeout(() => {
-          message.style.display = 'none';
-        }, 3000);
-      }
-    });
-  </script>
-</body>
+    <footer>&copy; 2025 Webshop AB</footer>
+  </body>
 </html>
