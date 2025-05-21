@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Produkter</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Produkter</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Hem</a></li>
-          <li><a href="products.html">Produkter</a></li>
-          <li><a href="contact.html">Kontakta oss</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    <main>
-      <!-- KATEGORIKNAPPAR -->
-      <section id="categories">
-        <h2>Filtrera produkter</h2>
-        <!-- "Visa alla" manuellt tillagd -->
-        <div class="category" data-filter="">Visa alla</div>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produkter</title>
+  
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-      <section id="productList"></section>
+<body>
+  <header>
+    <h1>Produkter</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Hem</a></li>
+        <li><a href="products.html">Produkter</a></li>
+        <li><a href="contact.html">Kontakta oss</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
 
-      <div id="thankYouMessage" style="display: none">
-        <p>Tack för ditt meddelande!</p>
-      </div>
-    </main>
+  <main>
+    <!-- KATEGORIKNAPPAR -->
+    <section id="categories">
+      <h2>Filtrera produkter</h2>
+      <!-- "Visa alla" manuellt tillagd -->
+      <div class="category" data-filter="">Visa alla</div>
+    </section>
 
-    <footer>
-      <p>&copy; 2025 Webshop AB</p>
-    </footer>
+    <section id="productList"></section>
 
-    <!-- Importera JS-modul -->
-    <script type="module">
-      import { fetchCategories, fetchProducts } from "./js/displayProducts.js";
+    <div id="thankYouMessage" style="display: none">
+      <p>Tack för ditt meddelande!</p>
+    </div>
+  </main>
 
-      document.addEventListener("DOMContentLoaded", () => {
-        // Ladda kategorier dynamiskt från Firebase
-        fetchCategories();
+  <footer>
+    <p>&copy; 2025 Webshop AB</p>
+  </footer>
 
-        // Lägg till funktion för "Visa alla"-knappen
-        const showAllBtn = document.querySelector('.category[data-filter=""]');
-        if (showAllBtn) {
-          showAllBtn.addEventListener("click", () => {
-            fetchProducts("");
-          });
-        }
+  <!-- Importera JS-modul -->
+  <script type="module">
+    import { fetchCategories, fetchProducts } from "./js/displayProducts.js";
 
-        // Hämta alla produkter direkt vid sidladdning
-        fetchProducts("");
-      });
-    </script>
-  </body>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Ladda kategorier dynamiskt från Firebase
+      fetchCategories();
+
+      // Lägg till funktion för "Visa alla"-knappen
+      const showAllBtn = document.querySelector('.category[data-filter=""]');
+      if (showAllBtn) {
+        showAllBtn.addEventListener("click", () => {
+          fetchProducts("");
+        });
+      }
+
+      // Hämta alla produkter direkt vid sidladdning
+      fetchProducts("");
+    });
+  </script>
+</body>
+
 </html>
