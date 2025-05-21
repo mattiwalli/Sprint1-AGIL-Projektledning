@@ -86,6 +86,7 @@ productForm.addEventListener("submit", async (e) => {
   const name = productNameIn.value.trim();
   const desc = productDescIn.value.trim();
   const cat = productCatSel.value;
+  const timestamp = Date.now();
   if (!name || !desc || !cat) {
     return alert("Fyll i namn, beskrivning och kategori.");
   }
@@ -101,6 +102,7 @@ productForm.addEventListener("submit", async (e) => {
     name,
      desc, 
      cat, 
+     timestamp,
      images: 
      imgUrls
 
