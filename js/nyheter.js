@@ -1,7 +1,7 @@
-const URL = `https://agil2-c5036-default-rtdb.europe-west1.firebasedatabase.app`;
+import { databaseURL } from "./firebase.js";
 
 async function getLatestProduct() {
-    const res = await fetch(`${URL}/products.json?orderBy=%22timestamp%22&limitToLast=3`);
+    const res = await fetch(`${databaseURL}/products.json?orderBy=%22timestamp%22&limitToLast=3`);
     const data = await res.json();
     if (!data) return [];
 

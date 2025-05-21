@@ -1,5 +1,4 @@
-export const databaseURL =
-  "https://agil2-c5036-default-rtdb.europe-west1.firebasedatabase.app/";
+export const databaseURL = "https://agil-projektledning-default-rtdb.europe-west1.firebasedatabase.app/";
 
 
 export async function addCategory(categoryName) {

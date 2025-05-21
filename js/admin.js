@@ -97,16 +97,16 @@ productForm.addEventListener("submit", async (e) => {
   // Läs in varje fil som Base64
   const imgUrls = await Promise.all(files.map(readFileAsDataURL));
 
-  const product = 
-  { 
+  const product =
+  {
     name,
-     desc, 
-     cat, 
-     timestamp,
-     images: 
-     imgUrls
+    desc,
+    cat,
+    timestamp,
+    images:
+      imgUrls
 
-   };
+  };
 
   try {
     await addProduct(product);
@@ -143,8 +143,8 @@ function renderProductList() {
       <p>${p.desc}</p>
       <div class="thumbs">
         ${p.images
-          .map((src) => `<img src="${src}" alt="${p.name}" width="60">`)
-          .join("")}
+        .map((src) => `<img src="${src}" alt="${p.name}" width="60">`)
+        .join("")}
       </div>
     `;
     productList.appendChild(li);

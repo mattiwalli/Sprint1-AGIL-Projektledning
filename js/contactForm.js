@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("contactFormElement");
-    const thankYou = document.getElementById("thankYouMessage");
-  
-    if (!form) return;
-  
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      const formData = new FormData(form);
-  
-      fetch("https://formspree.io/f/mdkgypqq", {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
+  const form = document.getElementById("contactFormElement");
+  const thankYou = document.getElementById("thankYouMessage");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch("https://formspree.io/f/mdkgypqq", {
+      method: "POST",
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
       .then(response => {
         if (response.ok) {
           form.style.display = "none";
@@ -27,6 +27,5 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(error => {
         alert("Nätverksfel. Försök igen senare.");
       });
-    });
   });
-  
+});
