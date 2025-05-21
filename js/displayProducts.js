@@ -74,7 +74,7 @@ export function displayProducts(products) {
     }
   }
   
-  // Funktion för att hämta produkter baserat på kategori
+  
   export function fetchProducts(categoryId) {
     console.log('Hämtar produkter från Firebase för kategori:', categoryId);
   

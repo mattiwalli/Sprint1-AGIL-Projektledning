@@ -96,7 +96,15 @@ productForm.addEventListener("submit", async (e) => {
   // Läs in varje fil som Base64
   const imgUrls = await Promise.all(files.map(readFileAsDataURL));
 
-  const product = { name, desc, cat, images: imgUrls };
+  const product = 
+  { 
+    name,
+     desc, 
+     cat, 
+     images: 
+     imgUrls
+
+   };
 
   try {
     await addProduct(product);
