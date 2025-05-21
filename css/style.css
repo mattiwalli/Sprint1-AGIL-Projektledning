@@ -78,6 +78,10 @@ footer {
   border-radius: 5px;
 }
 
+.product img:hover {
+  cursor: pointer;
+}
+
 .product h3 {
   font-size: 18px;
   margin: 10px 0;
