@@ -20,9 +20,10 @@ export function displayProducts(products) {
     productDescription.textContent = product.description;
     productDiv.appendChild(productDescription);
 
-    if (product.imageURL) {
+    if (product.images && Object.values(product.images).length > 0) {
+      const firstImageBase64 = Object.values(product.images)[0]; 
       const productImage = document.createElement('img');
-      productImage.src = product.imageURL;
+      productImage.src = firstImageBase64;
       productImage.alt = product.name;
       productImage.classList.add('product-image');
       productDiv.appendChild(productImage);
