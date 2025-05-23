@@ -20,6 +20,10 @@ export function displayProducts(products) {
     productDescription.textContent = product.description;
     productDiv.appendChild(productDescription);
 
+    productDiv.addEventListener('click', () => {
+      openImageModal(product.images);
+    });
+
     if (product.images && Object.values(product.images).length > 0) {
       const firstImageBase64 = Object.values(product.images)[0]; 
       const productImage = document.createElement('img');
@@ -101,3 +105,26 @@ export function fetchProducts(categoryId) {
       console.error('Fel vid hämtning av produkter:', error);
     });
 }
+
+
+
+//funktion för att öppna och visa alla bilderna för en produkt
+function openImageModal(images) {
+  const modal = document.getElementById('image-modal');
+  const modalImages = document.getElementById('modal-images');
+  modalImages.innerHTML = ''; 
+
+  Object.values(images).forEach(imageData => {
+    const img = document.createElement('img');
+    img.src = imageData;
+    modalImages.appendChild(img);
+  });
+
+  modal.classList.remove('hidden');
+  modal.style.display = 'block';
+}
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+  const modal = document.getElementById('image-modal');
+  modal.style.display = 'none';
+});
