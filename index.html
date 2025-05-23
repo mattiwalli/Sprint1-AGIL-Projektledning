@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webshop</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Webshop</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script type="module" src="./js/main.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="css/style.css" />
-  <script type="module" src="./js/main.js"></script>
-</head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Välkommen till Webshoppen</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="products.html">Produkter</a></li>
+            <li><a href="contact.html">Kontakta oss</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-<body>
-  <header>
-    <div class="container">
-      <h1>Välkommen till Webshoppen</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Hem</a></li>
-          <li><a href="products.html">Produkter</a></li>
-          <li><a href="contact.html">Kontakta oss</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <main>
+      <h2>Nyheter</h2>
+      <p>Välkommen till vår webshop. Här hittar du våra senaste produkter!</p>
+      <div id="nyheter"></div>
+    </main>
 
-  <main>
-    <h2>Nyheter</h2>
-    <p>Välkommen till vår webshop. Här hittar du våra senaste produkter!</p>
-    <div id="nyheter"></div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Webshop AB</p>
-  </footer>
-</body>
-
+    <footer>
+      <p>&copy; 2025 Webshop AB</p>
+    </footer>
+  </body>
 </html>

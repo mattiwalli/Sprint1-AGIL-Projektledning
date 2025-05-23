@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adminpanel – Produkter & Kategorier</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adminpanel – Produkter & Kategorier</title>
-  
-  <link rel="stylesheet" href="css/admin.css" />
-  <script type="module" src="/js/firebase.js" defer></script>
-  <script type="module" src="/js/admin.js" defer></script>
-</head>
+    <link rel="stylesheet" href="css/admin.css" />
+    <script type="module" src="/js/firebase.js" defer></script>
+    <script type="module" src="/js/admin.js" defer></script>
+  </head>
 
-<body>
-  <header>
-    <h1>Adminpanel</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Hem</a></li>
-        <li><a href="products.html">Produkter</a></li>
-        <li><a href="admin.html" class="active">Admin</a></li>
-      </ul>
-    </nav>
-  </header>
+  <body>
+    <header>
+      <h1>Adminpanel</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Hem</a></li>
+          <li><a href="products.html">Produkter</a></li>
+          <li><a href="admin.html" class="active">Admin</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
+    <main>
+      <section>
+        <h2>1. Skapa ny kategori</h2>
+        <form id="categoryForm">
+          <input
+            type="text"
+            id="categoryName"
+            placeholder="Kategorinamn"
+            required
+          />
+          <button type="submit">Lägg till kategori</button>
+        </form>
+        <div id="categoryMessage" class="message" hidden>Kategori tillagd!</div>
+      </section>
 
-    <section>
-      <h2>1. Skapa ny kategori</h2>
-      <form id="categoryForm">
-        <input type="text" id="categoryName" placeholder="Kategorinamn" required />
-        <button type="submit">Lägg till kategori</button>
-      </form>
-      <div id="categoryMessage" class="message" hidden>Kategori tillagd!</div>
-    </section>
+      <section>
+        <h2>Dina kategorier</h2>
+        <ul id="categoryList"></ul>
+      </section>
 
+      <section>
+        <h2>2. Lägg till ny produkt</h2>
+        <form id="productForm">
+          <input
+            type="text"
+            id="productName"
+            placeholder="Produktnamn"
+            required
+          />
+          <textarea
+            id="productDesc"
+            placeholder="Produktbeskrivning"
+            required
+          ></textarea>
+          <select id="productCategory" required>
+            <option value="" disabled selected>Välj kategori</option>
+          </select>
+          <div>
+            <label>Bilder (max 3):</label>
+            <input type="file" id="image1" accept="image/*" required />
+            <input type="file" id="image2" accept="image/*" />
+            <input type="file" id="image3" accept="image/*" />
+          </div>
+          <button type="submit">Lägg till produkt</button>
+        </form>
+        <div id="productMessage" class="message" hidden>Produkt tillagd!</div>
+      </section>
 
-    <section>
-      <h2>Dina kategorier</h2>
-      <ul id="categoryList"></ul>
-    </section>
+      <section>
+        <h2>3. Dina produkter</h2>
+        <ul id="productList"></ul>
+      </section>
+    </main>
 
-
-    <section>
-      <h2>2. Lägg till ny produkt</h2>
-      <form id="productForm">
-        <input type="text" id="productName" placeholder="Produktnamn" required />
-        <textarea id="productDesc" placeholder="Produktbeskrivning" required></textarea>
-        <select id="productCategory" required>
-          <option value="" disabled selected>Välj kategori</option>
-        </select>
-        <div>
-          <label>Bilder (max 3):</label>
-          <input type="file" id="image1" accept="image/*" required />
-          <input type="file" id="image2" accept="image/*" />
-          <input type="file" id="image3" accept="image/*" />
-        </div>
-        <button type="submit">Lägg till produkt</button>
-      </form>
-      <div id="productMessage" class="message" hidden>Produkt tillagd!</div>
-    </section>
-
-
-    <section>
-      <h2>3. Dina produkter</h2>
-      <ul id="productList"></ul>
-    </section>
-  </main>
-
-  <footer>&copy; 2025 Webshop AB</footer>
-</body>
-
+    <footer>&copy; 2025 Webshop AB</footer>
+  </body>
 </html>
