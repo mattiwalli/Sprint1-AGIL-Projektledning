@@ -8,48 +8,59 @@
 body {
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9fafb;
-  color: #1f2937; /* Mörkgrå, nästan svart */
+  color: #1f2937;
   line-height: 1.6;
   padding: 2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Header med centrerad nav */
 header {
-  background-color: #111827; /* Nästan svart */
-  color: #f9fafb; /* Ljus text */
+  background-color: #111827;
+  color: #f9fafb;
   padding: 2rem 2.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 header h1 {
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: 1.2px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 nav ul {
   list-style: none;
   display: flex;
   gap: 1.75rem;
+  padding: 0;
+  margin: 0;
 }
 
 nav a {
-  color: #9ca3af; /* Neutral grå */
+  color: #9ca3af;
   font-weight: 500;
   text-decoration: none;
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   transition: color 0.25s ease, background-color 0.25s ease;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 nav a:hover,
 nav a.active {
-  background-color: #2563eb; /* Blå accent */
+  background-color: #2563eb;
   color: white;
   box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
 }
@@ -80,8 +91,8 @@ section:hover {
 }
 
 #categoryList li {
-  background-color: #f3f4f6; /* Ljusgrå */
-  border-left: 4px solid #2563eb; /* Blå accent */
+  background-color: #f3f4f6;
+  border-left: 4px solid #2563eb;
   padding: 1rem 1.25rem;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -259,7 +270,7 @@ button.edit-btn:hover {
 }
 
 button.delete-btn {
-  background-color: #ef4444; /* Röd */
+  background-color: #ef4444;
   box-shadow: 0 6px 18px rgb(239 68 68 / 0.5);
 }
 

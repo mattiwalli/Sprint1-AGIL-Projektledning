@@ -13,6 +13,7 @@ body {
   padding: 2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 header {
@@ -44,7 +45,7 @@ nav a {
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   transition: color 0.25s ease, background-color 0.25s ease;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 nav a:hover,
@@ -194,8 +195,6 @@ footer {
 }
 
 
-
-
 .modal {
   display: none;
   position: fixed;
@@ -233,4 +232,24 @@ footer {
 
 .hidden {
   display: none;
+}
+#searchInput {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 5px solid #ccc;
+  width: 200px;
+  max-width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#searchInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#searchInput::placeholder {
+  color: #888;
+  font-style: italic;
 }

@@ -40,6 +40,7 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 1.75rem;
+  justify-content: center; /* centrera länkarna */
 }
 
 nav a {
@@ -49,7 +50,7 @@ nav a {
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   transition: color 0.25s ease, background-color 0.25s ease;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 nav a:hover,

@@ -22,6 +22,7 @@ header {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   margin-bottom: 2rem;
+  text-align: center; /* centrerar text och innehåll */
 }
 
 header h1 {
@@ -29,6 +30,13 @@ header h1 {
   font-size: 2rem;
   letter-spacing: 1.2px;
   margin-bottom: 0.75rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center; /* centrerar navigationsmenyn */
+  align-items: center;
+  margin-top: 1rem;
 }
 
 nav ul {
@@ -44,7 +52,7 @@ nav a {
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   transition: color 0.25s ease, background-color 0.25s ease;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 nav a:hover,
