@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adminpanel – Produkter & Kategorier</title>
+
+    <link rel="stylesheet" href="css/admin.css" />
     <script type="module" src="/js/firebase.js" defer></script>
     <script type="module" src="/js/admin.js" defer></script>
-    <link rel="stylesheet" href="css/admin.css" />
   </head>
+
   <body>
     <header>
       <h1>Adminpanel</h1>
@@ -15,13 +17,13 @@
         <ul>
           <li><a href="index.html">Hem</a></li>
           <li><a href="products.html">Produkter</a></li>
+          <li><a href="contact.html">Kontakta oss</a></li>
           <li><a href="admin.html" class="active">Admin</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-   
       <section>
         <h2>1. Skapa ny kategori</h2>
         <form id="categoryForm">
@@ -36,13 +38,11 @@
         <div id="categoryMessage" class="message" hidden>Kategori tillagd!</div>
       </section>
 
-    
       <section>
         <h2>Dina kategorier</h2>
         <ul id="categoryList"></ul>
       </section>
 
-      
       <section>
         <h2>2. Lägg till ny produkt</h2>
         <form id="productForm">
@@ -71,7 +71,6 @@
         <div id="productMessage" class="message" hidden>Produkt tillagd!</div>
       </section>
 
-      
       <section>
         <h2>3. Dina produkter</h2>
         <ul id="productList"></ul>

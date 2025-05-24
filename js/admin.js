@@ -3,6 +3,8 @@ import {
   getCategories,
   addProduct,
   getProducts,
+  updateProduct,
+  deleteProduct,
 } from "./firebase.js";
 
 const categoryForm = document.getElementById("categoryForm");
@@ -29,7 +31,6 @@ let products = [];
 loadCategories();
 loadProducts();
 
-
 async function loadCategories() {
   categories = await getCategories();
   updateCategorySelect();
@@ -40,7 +41,6 @@ async function loadProducts() {
   products = await getProducts();
   renderProductList();
 }
-
 
 categoryForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -58,7 +58,6 @@ categoryForm.addEventListener("submit", async (e) => {
   }
 });
 
-
 function updateCategorySelect() {
   productCatSel.innerHTML =
     '<option value="" disabled selected>Välj kategori</option>';
@@ -70,7 +69,6 @@ function updateCategorySelect() {
   });
 }
 
-
 function renderCategoryList() {
   categoryList.innerHTML = "";
   categories.forEach((cat) => {
@@ -80,26 +78,47 @@ function renderCategoryList() {
   });
 }
 
+let editingProduct = null;
 
 productForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const name = productNameIn.value.trim();
   const desc = productDescIn.value.trim();
   const cat = productCatSel.value;
+  const timestamp = Date.now();
   if (!name || !desc || !cat) {
     return alert("Fyll i namn, beskrivning och kategori.");
   }
 
   const files = imgInputs.map((i) => i.files[0]).filter((f) => f);
-  if (files.length === 0) return alert("Lägg till minst en bild");
 
-  // Läs in varje fil som Base64
-  const imgUrls = await Promise.all(files.map(readFileAsDataURL));
+  let imgUrls;
 
-  const product = { name, desc, cat, images: imgUrls };
+  if (files.length > 0) {
+    imgUrls = await Promise.all(files.map(readFileAsDataURL));
+  } else if (editingProduct && editingProduct.images) {
+    imgUrls = editingProduct.images;
+  } else {
+    return alert("Lägg till minst en bild");
+  }
+
+  const product = {
+    name,
+    desc,
+    cat,
+    timestamp,
+    images: imgUrls,
+  };
 
   try {
-    await addProduct(product);
+    if (editingProduct && editingProduct.id) {
+      await updateProduct(editingProduct.id, product); // redigera
+      editingProduct = null;
+    } else {
+      await addProduct(product); // ny
+    }
+
     productNameIn.value = "";
     productDescIn.value = "";
     productCatSel.selectedIndex = 0;
@@ -112,7 +131,6 @@ productForm.addEventListener("submit", async (e) => {
   }
 });
 
-
 function readFileAsDataURL(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -121,7 +139,6 @@ function readFileAsDataURL(file) {
     reader.readAsDataURL(file);
   });
 }
-
 
 function renderProductList() {
   productList.innerHTML = "";
@@ -136,7 +153,29 @@ function renderProductList() {
           .map((src) => `<img src="${src}" alt="${p.name}" width="60">`)
           .join("")}
       </div>
+      <button class="edit-btn">Redigera</button>
+      <button class="delete-btn">Ta bort</button>
     `;
+
+    li.querySelector(".edit-btn").addEventListener("click", () => {
+      productNameIn.value = p.name;
+      productDescIn.value = p.desc;
+      productCatSel.value = p.cat;
+      editingProduct = p;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    li.querySelector(".delete-btn").addEventListener("click", async () => {
+      if (confirm(`Vill du ta bort produkten "${p.name}"?`)) {
+        try {
+          await deleteProduct(p.id);
+          await loadProducts();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    });
+
     productList.appendChild(li);
   });
 }

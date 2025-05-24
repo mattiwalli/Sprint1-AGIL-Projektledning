@@ -1,6 +1,5 @@
 export const databaseURL =
-  "https://agil2-c5036-default-rtdb.europe-west1.firebasedatabase.app/";
-
+  "https://agil-projektledning-default-rtdb.europe-west1.firebasedatabase.app/";
 
 export async function addCategory(categoryName) {
   const response = await fetch(`${databaseURL}/categories.json`, {
@@ -12,14 +11,12 @@ export async function addCategory(categoryName) {
   return response.json();
 }
 
-
 export async function getCategories() {
   const res = await fetch(`${databaseURL}/categories.json`);
   const data = await res.json();
   if (!data) return [];
   return Object.values(data).map((cat) => cat.name);
 }
-
 
 export async function addProduct(product) {
   const response = await fetch(`${databaseURL}/products.json`, {
@@ -31,10 +28,38 @@ export async function addProduct(product) {
   return response.json();
 }
 
-
 export async function getProducts() {
   const res = await fetch(`${databaseURL}/products.json`);
   const data = await res.json();
   if (!data) return [];
-  return Object.values(data);
+
+  return Object.entries(data).map(([id, p]) => ({ id, ...p }));
+}
+
+export async function updateProduct(productId, updatedProduct) {
+  const response = await fetch(`${databaseURL}/products/${productId}.json`, {
+    method: "PATCH",
+    body: JSON.stringify(updatedProduct),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Kunde inte uppdatera produkt.");
+  }
+
+  return response.json();
+}
+
+export async function deleteProduct(productId) {
+  const response = await fetch(`${databaseURL}/products/${productId}.json`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Kunde inte ta bort produkt.");
+  }
+
+  return response.json();
 }

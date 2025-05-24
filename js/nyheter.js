@@ -1,4 +1,18 @@
-import { getLatestProduct } from "./firebase.js";
+import { databaseURL } from "./firebase.js";
+
+async function getLatestProduct() {
+    const res = await fetch(`${databaseURL}/products.json?orderBy=%22timestamp%22&limitToLast=3`);
+    const data = await res.json();
+    if (!data) return [];
+
+    const productsArray = Object.entries(data)
+        .map(([id, product]) => ({ id, ...product }))
+        .sort((a, b) => b.timestamp - a.timestamp);
+
+
+        console.log(data);
+    return productsArray;
+}
 
 export async function displayNyheter() {
     const container = document.getElementById("nyheter");
@@ -13,12 +27,10 @@ export async function displayNyheter() {
         const name = document.createElement("h3");
         name.textContent = product.name;
 
-        const timestamp = document.createElement("p");
-        const date = new Date(product.timestamp);
-        timestamp.textContent = `Published: ${date.toLocaleString()}`;
+        const img = document.createElement('img');
+        img.src = product.images[0];
 
-        card.appendChild(name);
-        card.appendChild(timestamp);
+        card.append(name, img);
 
         container.appendChild(card);
     });
