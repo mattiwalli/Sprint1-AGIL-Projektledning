@@ -1,3 +1,5 @@
+import { updateProduct } from './firebase.js';
+
 // Funktion för att visa produkter
 export function displayProducts(products) {
   const productListSection = document.getElementById('productList');
@@ -25,7 +27,7 @@ export function displayProducts(products) {
     });
 
     if (product.images && Object.values(product.images).length > 0) {
-      const firstImageBase64 = Object.values(product.images)[0]; 
+      const firstImageBase64 = Object.values(product.images)[0];
       const productImage = document.createElement('img');
       productImage.src = firstImageBase64;
       productImage.alt = product.name;
@@ -36,6 +38,22 @@ export function displayProducts(products) {
       noImage.textContent = 'Ingen bild tillgänglig';
       productDiv.appendChild(noImage);
     }
+
+    // Lagerdata
+  
+    let stock = product.stock;
+    if (stock === undefined) {
+      stock = Math.floor(Math.random() * 20) + 1;
+      product.stock = stock;
+
+      updateProduct(product.id, { stock }).catch(err =>
+        console.error(`Kunde inte uppdatera stock för ${product.name}`, err)
+      );
+    }
+
+    const stockParagraph = document.createElement('p');
+    stockParagraph.textContent = `I lager: ${stock} st`;
+    productDiv.appendChild(stockParagraph);
 
     productListSection.appendChild(productDiv);
   });
@@ -93,7 +111,15 @@ export function fetchProducts(categoryId) {
     .then(data => {
       console.log('Alla produkter från Firebase:', data);
 
-      const filteredProducts = Object.values(data).filter(product => {
+      const allProducts = Object.entries(data).map(([id, product]) => ({
+        id,
+        ...product
+      }));
+
+      //const filteredProducts = Object.values(data).filter(product => {
+      //  return categoryId === '' || product.categoryId === categoryId;
+      //});
+      const filteredProducts = allProducts.filter(product => {
         return categoryId === '' || product.categoryId === categoryId;
       });
 
@@ -112,7 +138,7 @@ export function fetchProducts(categoryId) {
 function openImageModal(images) {
   const modal = document.getElementById('image-modal');
   const modalImages = document.getElementById('modal-images');
-  modalImages.innerHTML = ''; 
+  modalImages.innerHTML = '';
 
   Object.values(images).forEach(imageData => {
     const img = document.createElement('img');
