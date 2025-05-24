@@ -13,7 +13,6 @@ body {
   padding: 2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 
 header {
@@ -23,9 +22,14 @@ header {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-header h1 {
+header h1, header h2 {
+  text-align: center; 
+  width: 100%; 
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: 1.2px;
@@ -36,6 +40,9 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 1.75rem;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 nav a {
@@ -55,12 +62,42 @@ nav a.active {
   box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
 }
 
+/* Sökfältet */
+#search {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#searchInput {
+  padding: 6px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 10px solid #ccc;
+  width: 200px;
+  max-width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#searchInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#searchInput::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+
 main {
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Kategoriknappar */
+
 #categories {
   margin-bottom: 2rem;
   user-select: none;
@@ -73,6 +110,7 @@ main {
   color: #111827;
   border-bottom: 2px solid #e0e7ff;
   padding-bottom: 0.4rem;
+  text-align: center; 
 }
 
 .category {
@@ -98,7 +136,6 @@ main {
   box-shadow: 0 4px 14px rgb(37 99 235 / 0.5);
 }
 
-/* Produktlistan */
 #productList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -152,7 +189,7 @@ main {
   user-select: none;
 }
 
-/* Tackmeddelande */
+
 #thankYouMessage {
   font-weight: 600;
   font-size: 1.1rem;
@@ -167,7 +204,7 @@ main {
   user-select: none;
 }
 
-/* Footer */
+
 footer {
   text-align: center;
   margin-top: 4rem;
@@ -178,7 +215,6 @@ footer {
   user-select: none;
 }
 
-/* Responsivitet */
 @media (max-width: 600px) {
   nav ul {
     flex-direction: column;
@@ -192,64 +228,4 @@ footer {
   main {
     padding: 0 1rem;
   }
-}
-
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.modal-content {
-  margin: 5% auto;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 80%;
-}
-
-.modal-content img {
-  max-width: 300px;
-  border-radius: 10px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 30px;
-  right: 50px;
-  color: white;
-  font-size: 40px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-#searchInput {
-  padding: 5px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 5px solid #ccc;
-  width: 200px;
-  max-width: 100%;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#searchInput:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-#searchInput::placeholder {
-  color: #888;
-  font-style: italic;
 }
