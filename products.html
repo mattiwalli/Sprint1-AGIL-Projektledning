@@ -16,9 +16,12 @@
           <li><a href="contact.html">Kontakta oss</a></li>
           <li><a href="admin.html">Admin</a></li>
         </ul>
+        <section id="search">
+          <input type="text" id="searchInput" placeholder="Sök produkt..." />
+        </section>
+        
       </nav>
     </header>
-
     <main>
       <!-- KATEGORIKNAPPAR -->
       <section id="categories">
@@ -37,26 +40,7 @@
     <footer>
       <p>&copy; 2025 Webshop AB</p>
     </footer>
+    <script type="module" src="./js/productsPage.js"></script>
 
-    <!-- Importera JS-modul -->
-    <script type="module">
-      import { fetchCategories, fetchProducts } from "./js/displayProducts.js";
-
-      document.addEventListener("DOMContentLoaded", () => {
-        // Ladda kategorier dynamiskt från Firebase
-        fetchCategories();
-
-        // Lägg till funktion för "Visa alla"-knappen
-        const showAllBtn = document.querySelector('.category[data-filter=""]');
-        if (showAllBtn) {
-          showAllBtn.addEventListener("click", () => {
-            fetchProducts("");
-          });
-        }
-
-        // Hämta alla produkter direkt vid sidladdning
-        fetchProducts("");
-      });
-    </script>
   </body>
 </html>
