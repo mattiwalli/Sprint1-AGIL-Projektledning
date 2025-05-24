@@ -16,22 +16,49 @@ async function getLatestProduct() {
 
 export async function displayNyheter() {
     const container = document.getElementById("nyheter");
-
     const products = await getLatestProduct();
-
     container.innerHTML = "";
 
-    products.forEach(product => {
-        const card = document.createElement("div");
+    if (products.length === 0) {
+        container.textContent = "No products found.";
+        return;
+    }
 
-        const name = document.createElement("h3");
+    let currentIndex = 0;
+
+    const card = document.createElement("div");
+    card.id = "product-card";
+
+    const name = document.createElement("h3");
+    const img = document.createElement("img");
+
+    card.appendChild(name);
+    card.appendChild(img);
+
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "Prev";
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next";
+
+    container.appendChild(card);
+    container.appendChild(prevBtn);
+    container.appendChild(nextBtn);
+
+    function showProduct(index) {
+        const product = products[index];
         name.textContent = product.name;
-
-        const img = document.createElement('img');
         img.src = product.images[0];
+    }
 
-        card.append(name, img);
-
-        container.appendChild(card);
+    prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + products.length) % products.length;
+        showProduct(currentIndex);
     });
-};
+
+    nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % products.length;
+        showProduct(currentIndex);
+    });
+
+    showProduct(currentIndex);
+}
