@@ -289,6 +289,29 @@ footer {
   letter-spacing: 0.04em;
 }
 
+#submissions-list .submission {
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+.submission {
+  margin-bottom: 20px;
+}
+
+.submission .delete-btn {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submission .delete-btn:hover {
+  background-color: black;
+}
+
+
+
 /* Responsivitet */
 @media (max-width: 600px) {
   nav ul {
