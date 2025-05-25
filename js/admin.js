@@ -1,3 +1,4 @@
+
 import {
   addCategory,
   getCategories,
@@ -6,6 +7,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "./firebase.js";
+
 
 const categoryForm = document.getElementById("categoryForm");
 const categoryInput = document.getElementById("categoryName");
