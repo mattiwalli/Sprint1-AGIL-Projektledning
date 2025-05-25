@@ -20,6 +20,7 @@ const imgInputs = [
   document.getElementById("image2"),
   document.getElementById("image3"),
 ];
+const highlightCheckbox = document.getElementById("highlightCheckbox");
 const productMsg = document.getElementById("productMessage");
 
 const productList = document.getElementById("productList");
@@ -87,6 +88,8 @@ productForm.addEventListener("submit", async (e) => {
   const desc = productDescIn.value.trim();
   const cat = productCatSel.value;
   const timestamp = Date.now();
+  const highlight = highlightCheckbox.checked;
+
   if (!name || !desc || !cat) {
     return alert("Fyll i namn, beskrivning och kategori.");
   }
@@ -94,7 +97,6 @@ productForm.addEventListener("submit", async (e) => {
   const files = imgInputs.map((i) => i.files[0]).filter((f) => f);
 
   let imgUrls;
-
   if (files.length > 0) {
     imgUrls = await Promise.all(files.map(readFileAsDataURL));
   } else if (editingProduct && editingProduct.images) {
@@ -109,20 +111,20 @@ productForm.addEventListener("submit", async (e) => {
     cat,
     timestamp,
     images: imgUrls,
+    highlight,
   };
 
   try {
     if (editingProduct && editingProduct.id) {
       await updateProduct(editingProduct.id, product); // redigera
-      editingProduct = null;
     } else {
       await addProduct(product); // ny
     }
 
-    productNameIn.value = "";
-    productDescIn.value = "";
-    productCatSel.selectedIndex = 0;
-    imgInputs.forEach((i) => (i.value = ""));
+    // ✅ Nollställ formuläret och redigeringsläge
+    productForm.reset();
+    editingProduct = null;
+
     productMsg.hidden = false;
     setTimeout(() => (productMsg.hidden = true), 2000);
     await loadProducts();
@@ -153,6 +155,11 @@ function renderProductList() {
           .map((src) => `<img src="${src}" alt="${p.name}" width="60">`)
           .join("")}
       </div>
+      <label>
+        <input type="checkbox" class="highlight-checkbox" ${
+          p.highlight ? "checked" : ""
+        }> Highlight
+      </label>
       <button class="edit-btn">Redigera</button>
       <button class="delete-btn">Ta bort</button>
     `;
@@ -161,6 +168,7 @@ function renderProductList() {
       productNameIn.value = p.name;
       productDescIn.value = p.desc;
       productCatSel.value = p.cat;
+      highlightCheckbox.checked = p.highlight || false;
       editingProduct = p;
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
@@ -175,6 +183,27 @@ function renderProductList() {
         }
       }
     });
+
+    li.querySelector(".highlight-checkbox").addEventListener(
+      "change",
+      async (e) => {
+        const checked = e.target.checked;
+        const highlightCount = products.filter((prod) => prod.highlight).length;
+
+        if (checked && highlightCount >= 5 && !p.highlight) {
+          alert("Du kan bara ha 5 highlights.");
+          e.target.checked = false;
+          return;
+        }
+
+        try {
+          await updateProduct(p.id, { ...p, highlight: checked });
+          await loadProducts();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    );
 
     productList.appendChild(li);
   });
