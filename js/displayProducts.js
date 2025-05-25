@@ -67,10 +67,17 @@ export function displayProducts(products) {
     const productDescription = document.createElement('p');
     productDescription.textContent = product.desc || product.description || '';
     productDiv.appendChild(productDescription);
-
-
-
     productDiv.appendChild(stockParagraph);
+
+    // Wishlist knapp
+    const wishlistButton = document.createElement('button');
+    wishlistButton.textContent = 'Lägg till i önskelista';
+    wishlistButton.classList.add('wishlist-button');
+    wishlistButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      console.log(`Önskelista: ${product.name}`);
+    });
+    productDiv.appendChild(wishlistButton);
     
     productListSection.appendChild(productDiv);
   });
