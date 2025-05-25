@@ -26,10 +26,6 @@ export function displayProducts(products) {
     productName.textContent = product.name;
     productDiv.appendChild(productName);
 
-    const productDescription = document.createElement('p');
-    productDescription.textContent = product.desc || product.description || '';
-    productDiv.appendChild(productDescription);
-
     if (product.images && product.images.length > 0) {
       const productImage = document.createElement('img');
       productImage.src = product.images[0];
@@ -41,6 +37,10 @@ export function displayProducts(products) {
       noImage.textContent = 'Ingen bild tillgänglig';
       productDiv.appendChild(noImage);
     }
+
+    const productDescription = document.createElement('p');
+    productDescription.textContent = product.desc || product.description || '';
+    productDiv.appendChild(productDescription);
     
     productListSection.appendChild(productDiv);
   });
