@@ -1,4 +1,3 @@
-
 import {
   addCategory,
   getCategories,
@@ -7,7 +6,6 @@ import {
   updateProduct,
   deleteProduct,
 } from "./firebase.js";
-
 
 const categoryForm = document.getElementById("categoryForm");
 const categoryInput = document.getElementById("categoryName");
@@ -123,7 +121,6 @@ productForm.addEventListener("submit", async (e) => {
       await addProduct(product); // ny
     }
 
-    // ✅ Nollställ formuläret och redigeringsläge
     productForm.reset();
     editingProduct = null;
 
@@ -148,12 +145,15 @@ function renderProductList() {
   productList.innerHTML = "";
   products.forEach((p) => {
     const li = document.createElement("li");
+
+    const images = Array.isArray(p.images) ? p.images : [];
+
     li.innerHTML = `
       <h3>${p.name}</h3>
       <p><em>${p.cat}</em></p>
       <p>${p.desc}</p>
       <div class="thumbs">
-        ${p.images
+        ${images
           .map((src) => `<img src="${src}" alt="${p.name}" width="60">`)
           .join("")}
       </div>
