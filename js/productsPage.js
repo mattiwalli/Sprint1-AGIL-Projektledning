@@ -15,17 +15,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   cachedProducts = Object.values(data || {});
   displayProducts(cachedProducts); // Visa alla produkter
 
-  // Aktivera sökfunktion
   searchInput.addEventListener("input", (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-
-    const filtered = cachedProducts.filter(product =>
-      product.name.toLowerCase().includes(searchTerm) ||
-      (product.desc?.toLowerCase().includes(searchTerm)) ||
-      (product.description?.toLowerCase().includes(searchTerm)) // Lägg till description
-    );
+    const searchTerm = e.target.value.trim().toLowerCase();
+  
+    const filtered = cachedProducts.filter(product => {
+      const name = (product.name || '').toLowerCase();
+      const desc = (product.desc || '').toLowerCase();
+      const description = (product.description || '').toLowerCase();
+      const category = (product.cat || '').toLowerCase();
+      const price = (product.price !== undefined ? String(product.price) : '').toLowerCase();
+  
+      return (
+        name.includes(searchTerm) ||
+        desc.includes(searchTerm) ||
+        description.includes(searchTerm) ||
+        category.includes(searchTerm) ||
+        price.includes(searchTerm)
+      );
+    });
+  
     displayProducts(filtered);
   });
+  
+  
 
   // Lägg till funktion för "Visa alla"-knappen
   const showAllBtn = document.querySelector('.category[data-filter=""]');
