@@ -3,13 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wishlist</title>
-  <link rel="stylesheet" href="./css/wishlist.css" />
+  <title>Önskelista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
   <script type="module" src="./js/wishlist.js"></script>
 </head>
-<body>
-  <h1>Wishlist</h1>
-  <div id="wishlistItems"></div>
 
+<body>
+  <header>
+    <div class="container">
+      <h1>Välkommen till Webshoppen</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Hem</a></li>
+          <li><a href="products.html">Produkter</a></li>
+          <li><a href="wishlist.html" class="active">Önskelista</a></li>
+          <li><a href="contact.html">Kontakta oss</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Min önskelista</h2>
+    <p>Här ser du produkterna du har lagt till i din önskelista.</p>
+    <div id="wishlistItems" class="product-grid"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Webshop AB</p>
+  </footer>
 </body>
 </html>
