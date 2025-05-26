@@ -119,13 +119,6 @@ main p {
   font-size: 1rem;
   user-select: text;
 }
-#nyheter img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 50px;
-  margin-bottom: 1rem;
-}
 
 #product-card img {
   max-width: 400px;
