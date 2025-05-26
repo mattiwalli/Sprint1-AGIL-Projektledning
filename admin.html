@@ -2,12 +2,9 @@
 <html lang="sv">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Adminpanel – Produkter & Kategorier</title>
-
     <link rel="stylesheet" href="css/admin.css" />
-    <script type="module" src="/js/firebase.js" defer></script>
-    <script type="module" src="/js/admin.js" defer></script>
   </head>
 
   <body>
@@ -24,6 +21,7 @@
     </header>
 
     <main>
+      <!-- Sektion 1: Skapa ny kategori -->
       <section>
         <h2>1. Skapa ny kategori</h2>
         <form id="categoryForm">
@@ -38,11 +36,13 @@
         <div id="categoryMessage" class="message" hidden>Kategori tillagd!</div>
       </section>
 
+      <!-- Sektion 2: Lista kategorier -->
       <section>
         <h2>Dina kategorier</h2>
         <ul id="categoryList"></ul>
       </section>
 
+      <!-- Sektion 3: Lägg till ny produkt -->
       <section>
         <h2>2. Lägg till ny produkt</h2>
         <form id="productForm">
@@ -66,6 +66,10 @@
             <input type="file" id="image2" accept="image/*" />
             <input type="file" id="image3" accept="image/*" />
           </div>
+          <label>
+            <input type="checkbox" id="highlightCheckbox" />
+            Visa på startsidan (highlight)
+          </label>
           <button type="submit">Lägg till produkt</button>
         </form>
         <div id="productMessage" class="message" hidden>Produkt tillagd!</div>
@@ -75,8 +79,17 @@
         <h2>3. Dina produkter</h2>
         <ul id="productList"></ul>
       </section>
+
+      <section>
+        <h2>Inskickade formulär</h2>
+        <div id="submissions-list">Laddar inskick...</div>
+      </section>
     </main>
 
     <footer>&copy; 2025 Webshop AB</footer>
+
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/formSubmission.js"></script>
   </body>
 </html>

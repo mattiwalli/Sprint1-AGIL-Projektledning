@@ -1,31 +1,33 @@
-document.addEventListener("DOMContentLoaded", function () {
+import { databaseURL } from "./firebase.js";
+
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactFormElement");
   const thankYou = document.getElementById("thankYouMessage");
 
-  if (!form) return;
-
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+      timestamp: Date.now(),
+    };
 
-    fetch("https://formspree.io/f/mdkgypqq", {
-      method: "POST",
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          form.style.display = "none";
-          if (thankYou) thankYou.style.display = "block";
-        } else {
-          alert("Något gick fel. Försök igen senare.");
-        }
-      })
-      .catch(error => {
-        alert("Nätverksfel. Försök igen senare.");
+    try {
+      const response = await fetch(`${databaseURL}/formSubmissions.json`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
+
+      if (!response.ok) throw new Error("Något gick fel vid sparning");
+
+      form.style.display = "none";
+      thankYou.style.display = "block";
+    } catch (error) {
+      alert("Fel: " + error.message);
+    }
   });
 });
