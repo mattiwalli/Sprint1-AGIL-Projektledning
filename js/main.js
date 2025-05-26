@@ -1,4 +1,4 @@
-import { displayNyheter } from "./nyheter.js";
-
+import { displayHighlights, displayNyheter } from "./nyheter.js";
 
 displayNyheter();
+displayHighlights();

@@ -83,14 +83,14 @@ main p {
 }
 
 /* Nyheter-sektion */
-#nyheter {
+#nyheter, #highlight {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.8rem;
 }
 
 /* Exempel på nyhetskort */
-#nyheter article {
+#nyheter article, #highlight article {
   background: white;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgb(0 0 0 / 0.07);
@@ -101,19 +101,19 @@ main p {
   flex-direction: column;
 }
 
-#nyheter article:hover {
+#nyheter article:hover, #highlight article:hover {
   box-shadow: 0 12px 30px rgb(0 0 0 / 0.12);
   transform: translateY(-5px);
 }
 
-#nyheter h3 {
+#nyheter h3, #highlight h3 {
   font-weight: 700;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   color: #111827;
 }
 
-#nyheter p {
+#nyheter p, #highlight p {
   flex-grow: 1;
   color: #6b7280;
   font-size: 1rem;
